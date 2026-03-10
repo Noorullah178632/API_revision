@@ -1,12 +1,12 @@
-class JsonDarkModel {
+class JsonDartModel {
   int? userId;
   int? id;
   String? title;
   String? body;
 
-  JsonDarkModel({this.userId, this.id, this.title, this.body});
+  JsonDartModel({this.userId, this.id, this.title, this.body});
 
-  JsonDarkModel.fromJson(Map<String, dynamic> json) {
+  JsonDartModel.fromJson(Map<dynamic, dynamic> json) {
     userId = json['userId'];
     id = json['id'];
     title = json['title'];
