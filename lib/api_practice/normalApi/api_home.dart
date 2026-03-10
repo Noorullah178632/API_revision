@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:api_revision/api_practice/json_dart_model.dart';
+import 'package:api_revision/api_practice/normalApi/json_dart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

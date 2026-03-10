@@ -1,4 +1,4 @@
-import 'package:api_revision/api_practice/api_home.dart';
+import 'package:api_revision/api_practice/ownModleAPi/post_api.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: ApiHome(),
+      home: PostApi(),
     );
   }
 }
