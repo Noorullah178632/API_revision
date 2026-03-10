@@ -15,8 +15,33 @@ class _ApiHomeState extends State<ApiHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("APi call "), centerTitle: true),
-      body: Expanded(child: Text("data")),
+      appBar: AppBar(title: Text("Get Api Call "), centerTitle: true),
+      body: FutureBuilder(
+        future: getPostApi(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator(color: Colors.blue));
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("No Data Found"));
+          }
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: Column(
+                  mainAxisAlignment: .start,
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text("id:  ${data[index].id}"),
+                    Text("title:  ${data[index].title}"),
+                    Text("body: ${data[index].body}"),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -31,6 +56,7 @@ class _ApiHomeState extends State<ApiHome> {
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body.toString());
       for (Map i in body) {
+        //it will take the raw data then with the help of jsonDartModel we will use it in a dart object
         data.add(
           JsonDartModel.fromJson(i),
         ); //it will add first ,second,third, and so on which we called json object
