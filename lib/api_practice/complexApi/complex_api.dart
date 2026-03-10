@@ -18,7 +18,7 @@ class _ComplexApiState extends State<ComplexApi> {
       backgroundColor: Colors.white,
       appBar: AppBar(title: Text("Complex Api"), centerTitle: true),
       body: FutureBuilder(
-        future: getPostApi(),
+        future: getAPi(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator(color: Colors.blue));
@@ -27,24 +27,18 @@ class _ComplexApiState extends State<ComplexApi> {
             return Center(child: Text("No Data Found"));
           }
           return ListView.builder(
-            itemCount: data.length,
+            itemCount: dataList.length,
             itemBuilder: (context, index) {
               return Card(
                 child: Column(
                   mainAxisAlignment: .start,
                   crossAxisAlignment: .start,
                   children: [
-                    ReuseRow(name: "Name", value: snapshot.data![index].name!),
+                    ReuseRow(name: "Name", value: dataList[index]["name"]),
                     ReuseRow(
-                      name: "address",
+                      name: "Address",
                       value:
-                          snapshot.data![index].address!.street! +
-                          snapshot.data![index].address!.zipcode!,
-                    ),
-                    ReuseRow(
-                      name: "lat lng",
-                      value:
-                          "${snapshot.data![index].address!.geo!.lat!}   ${snapshot.data![index].address!.geo!.lng!}",
+                          "${dataList[index]["address"]["city"]} (Lat: ${dataList[index]["address"]["geo"]["lat"]})",
                     ),
                   ],
                 ),
@@ -58,7 +52,7 @@ class _ComplexApiState extends State<ComplexApi> {
 
   //make a list for data storing
   List<ComplexDart> data = [];
-  //get post api
+  //get post api with the help of model
   Future<List<ComplexDart>> getPostApi() async {
     final response = await http.get(
       Uri.parse("https://jsonplaceholder.typicode.com/users"),
@@ -75,6 +69,24 @@ class _ComplexApiState extends State<ComplexApi> {
       return data;
     } else {
       return data;
+    }
+  }
+
+  //get api without the model
+  // ignore: strict_top_level_inference, prefer_typing_uninitialized_variables
+  List<Map<dynamic, dynamic>> dataList = [];
+  Future<List<Map<dynamic, dynamic>>> getAPi() async {
+    final respone = await http.get(
+      Uri.parse("https://jsonplaceholder.typicode.com/users"),
+    );
+    if (respone.statusCode == 200) {
+      dataList = List<Map<dynamic, dynamic>>.from(
+        jsonDecode(respone.body.toString()),
+      );
+
+      return dataList;
+    } else {
+      return dataList;
     }
   }
 }
