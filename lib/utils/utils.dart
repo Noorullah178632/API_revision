@@ -38,4 +38,8 @@ class Utils {
       ),
     );
   }
+
+  static void moveFocusNode(BuildContext context, FocusNode next) {
+    FocusScope.of(context).requestFocus(next);
+  }
 }
