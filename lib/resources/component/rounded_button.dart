@@ -16,9 +16,7 @@ class RoundedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        onpress;
-      },
+      onTap: onpress,
       child: Container(
         width: 200, // Full width
         height: 55, // Ideal mobile height

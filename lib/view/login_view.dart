@@ -1,4 +1,5 @@
 import 'package:api_revision/resources/component/rounded_button.dart';
+import 'package:api_revision/utils/RoutesFolder/routes_name.dart';
 import 'package:api_revision/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final GlobalKey _formkey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final ValueNotifier<bool> _obsecureText = ValueNotifier<bool>(true);
@@ -22,18 +23,21 @@ class _LoginViewState extends State<LoginView> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         title: Text("Login", style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
       body: Column(
+        mainAxisAlignment: .center,
+        crossAxisAlignment: .center,
         children: [
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Form(
               key: _formkey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: .center,
+                mainAxisAlignment: .center,
                 children: [
                   // Email
                   TextFormField(
@@ -83,7 +87,14 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                   SizedBox(height: height * .1),
-                  RoundedButton(text: "Login", onpress: () {}),
+                  RoundedButton(
+                    text: "Login",
+                    onpress: () {
+                      if (_formkey.currentState!.validate()) {
+                        Navigator.pushNamed(context, RoutesName.home);
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
