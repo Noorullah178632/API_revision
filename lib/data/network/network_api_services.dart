@@ -41,7 +41,7 @@ class NetworkApiServices extends BaseApiServices {
       case 201:
         return jsonDecode(response.body);
       case 400:
-        return BadRequestException(response.body.toString());
+        throw BadRequestException(response.body.toString());
       case 401:
       case 403:
         throw UnauthorizedException(response.body.toString());

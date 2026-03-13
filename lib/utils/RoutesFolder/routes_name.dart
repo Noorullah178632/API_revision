@@ -1,4 +1,4 @@
 class RoutesName {
-  static const String home = "home";
-  static const String login = "login_page";
+  static const String home = "home_screen";
+  static const String login = "login_screen";
 }

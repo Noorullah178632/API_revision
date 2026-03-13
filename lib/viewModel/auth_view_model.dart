@@ -1,7 +1,6 @@
 import 'package:api_revision/repository/auth_repository.dart';
 import 'package:api_revision/utils/RoutesFolder/routes_name.dart';
 import 'package:api_revision/utils/utils.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AuthViewModel extends ChangeNotifier {
@@ -15,16 +14,17 @@ class AuthViewModel extends ChangeNotifier {
 
   Future<dynamic> loginUser(dynamic data, BuildContext context) async {
     setLoading(true);
-    _authRepository
-        .loginUser(data)
-        .then((value) {
-          setLoading(false);
-          Utils.showFlash(context, "Login successfully");
-        })
-        .onError((error, stackError) {
-          setLoading(false);
-          Utils.showFlash(context, error.toString());
-        });
+    try {
+      final response = await _authRepository.loginUser(data);
+      setLoading(false);
+      // Only happens if NO error is thrown
+      Utils.showMySnackBar(context, "Login successfully");
+      Navigator.pushReplacementNamed(context, RoutesName.home);
+    } catch (e) {
+      setLoading(false);
+      // This will now catch the Unauthorized/BadRequest exceptions
+      Utils.showFlash(context, e.toString());
+    }
   }
 
   Future<dynamic> registerUser(dynamic data, BuildContext context) async {

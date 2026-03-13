@@ -5,19 +5,8 @@ import 'package:flutter/foundation.dart';
 
 class AuthRepository {
   final BaseApiServices _services = NetworkApiServices();
-
   Future<dynamic> loginUser(dynamic data) async {
-    try {
-      final response = await _services.getPostApiServices(
-        AppUrl.loginEndPointUrl,
-        data,
-      );
-      return response;
-    } catch (e) {
-      if (kDebugMode) {
-        print("error: ${e.toString()}");
-      }
-    }
+    return await _services.getPostApiServices(AppUrl.loginEndPointUrl, data);
   }
 
   Future<dynamic> registerUser(dynamic data) async {
