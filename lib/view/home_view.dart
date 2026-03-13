@@ -1,4 +1,7 @@
+import 'package:api_revision/services/splash_services.dart';
+import 'package:api_revision/utils/RoutesFolder/routes_name.dart';
 import 'package:api_revision/utils/utils.dart';
+import 'package:api_revision/viewModel/user_token_services.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -9,6 +12,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  SplashServices splashServices = SplashServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +45,18 @@ class _HomeViewState extends State<HomeView> {
             child: Center(child: Text("Show SnackBar ")),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          UserTokenViewModel().clearUsers().then((value) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RoutesName.login,
+              (route) => false,
+            );
+          });
+        },
+        child: Icon(Icons.logout),
       ),
     );
   }

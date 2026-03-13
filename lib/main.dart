@@ -1,13 +1,17 @@
 import 'package:api_revision/utils/RoutesFolder/routes.dart';
 import 'package:api_revision/utils/RoutesFolder/routes_name.dart';
 import 'package:api_revision/viewModel/auth_view_model.dart';
+import 'package:api_revision/viewModel/user_token_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthViewModel())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => UserTokenViewModel()),
+      ],
       child: MyApp(),
     ),
   );

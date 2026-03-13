@@ -8,7 +8,7 @@ class UserTokenViewModel extends ChangeNotifier {
   //save user in sharedpreference
   Future<bool> setUserToken(TokenModel token) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString("token", token.accessToken.toString());
+    preferences.setString("accessToken", token.accessToken.toString());
     notifyListeners();
     return true;
   }
@@ -16,7 +16,7 @@ class UserTokenViewModel extends ChangeNotifier {
   //get user in sharedpreference
   Future<TokenModel> getUserToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? token = preferences.getString("token");
+    String? token = preferences.getString("accessToken");
     return TokenModel(accessToken: token);
   }
 

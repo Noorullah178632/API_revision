@@ -1,9 +1,12 @@
+import 'package:api_revision/models/user_token_model.dart';
 import 'package:api_revision/repository/auth_repository.dart';
 import 'package:api_revision/utils/RoutesFolder/routes_name.dart';
 import 'package:api_revision/utils/utils.dart';
+import 'package:api_revision/viewModel/user_token_services.dart';
 import 'package:flutter/material.dart';
 
 class AuthViewModel extends ChangeNotifier {
+  final UserTokenViewModel userToken = UserTokenViewModel();
   final AuthRepository _authRepository = AuthRepository();
   bool _isloading = false;
   bool get isLoading => _isloading;
@@ -15,8 +18,11 @@ class AuthViewModel extends ChangeNotifier {
   Future<dynamic> loginUser(dynamic data, BuildContext context) async {
     setLoading(true);
     try {
-      await _authRepository.loginUser(data);
+      final response = await _authRepository.loginUser(data);
       setLoading(false);
+      // save the user token
+      String tokenValue = response['accessToken'].toString();
+      userToken.setUserToken(TokenModel(accessToken: tokenValue));
       // Only happens if NO error is thrown
       Utils.showMySnackBar(context, "Login successfully");
       Navigator.pushReplacementNamed(context, RoutesName.home);
