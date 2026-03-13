@@ -15,7 +15,7 @@ class AuthViewModel extends ChangeNotifier {
   Future<dynamic> loginUser(dynamic data, BuildContext context) async {
     setLoading(true);
     try {
-      final response = await _authRepository.loginUser(data);
+      await _authRepository.loginUser(data);
       setLoading(false);
       // Only happens if NO error is thrown
       Utils.showMySnackBar(context, "Login successfully");

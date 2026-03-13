@@ -18,6 +18,19 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("Splah Screen")));
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Text(
+            "Splah Screen",
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: .bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

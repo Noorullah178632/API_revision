@@ -7,14 +7,14 @@ class SplashServices {
   Future<void> currentUserAuthentication(BuildContext context) async {
     UserTokenViewModel()
         .getUserToken()
-        .then((value) {
+        .then((value) async {
           if (value.accessToken == "null" ||
               value.accessToken == "" ||
               value.accessToken == null) {
-            Future.delayed(Duration(seconds: 3));
+            await Future.delayed(Duration(seconds: 3));
             Navigator.pushNamed(context, RoutesName.login);
           } else {
-            Future.delayed(Duration(seconds: 3));
+            await Future.delayed(Duration(seconds: 3));
             Navigator.pushNamed(context, RoutesName.home);
           }
         })

@@ -1,6 +1,7 @@
 import 'package:api_revision/utils/RoutesFolder/routes_name.dart';
 import 'package:api_revision/view/home_view.dart';
 import 'package:api_revision/view/login_view.dart';
+import 'package:api_revision/view/splash_view.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -11,6 +12,8 @@ class Routes {
 
       case RoutesName.login:
         return MaterialPageRoute(builder: (_) => LoginView());
+      case RoutesName.splash:
+        return MaterialPageRoute(builder: (_) => SplashView());
 
       default:
         return MaterialPageRoute(

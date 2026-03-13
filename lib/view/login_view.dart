@@ -31,6 +31,7 @@ class _LoginViewState extends State<LoginView> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.green,
         title: Text("Login", style: TextStyle(color: Colors.white)),
         centerTitle: true,
