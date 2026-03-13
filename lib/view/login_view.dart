@@ -1,7 +1,8 @@
 import 'package:api_revision/resources/component/rounded_button.dart';
-import 'package:api_revision/utils/RoutesFolder/routes_name.dart';
 import 'package:api_revision/utils/utils.dart';
+import 'package:api_revision/viewModel/auth_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -17,6 +18,13 @@ class _LoginViewState extends State<LoginView> {
   final ValueNotifier<bool> _obsecureText = ValueNotifier<bool>(true);
   FocusNode emailNode = FocusNode();
   FocusNode passwordNode = FocusNode();
+  //dispose method
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,12 +95,26 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                   SizedBox(height: height * .1),
-                  RoundedButton(
-                    text: "Login",
-                    onpress: () {
-                      if (_formkey.currentState!.validate()) {
-                        Navigator.pushNamed(context, RoutesName.home);
-                      }
+                  Consumer<AuthViewModel>(
+                    builder: (context, vm, child) {
+                      return RoundedButton(
+                        text: "Login",
+                        isLoading: vm.isLoading,
+                        onpress: () async {
+                          if (_formkey.currentState!.validate()) {
+                            Map<String, dynamic> data = {
+                              "username": emailController.text
+                                  .toString()
+                                  .trim(),
+                              "password": passwordController.text
+                                  .toString()
+                                  .trim(),
+                            };
+
+                            await vm.loginUser(data, context);
+                          }
+                        },
+                      );
                     },
                   ),
                 ],
