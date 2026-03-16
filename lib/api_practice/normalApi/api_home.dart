@@ -34,6 +34,7 @@ class _ApiHomeState extends State<ApiHome> {
                   children: [
                     Text("id:  ${data[index].id}"),
                     Text("id:  ${data[index].id}"),
+                    Text("id:  ${data[index].id}"),
                     Text("title:  ${data[index].title}"),
                     Text("body: ${data[index].body}"),
                   ],
