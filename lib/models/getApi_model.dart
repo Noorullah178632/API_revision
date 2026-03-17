@@ -1,13 +1,13 @@
-class GetApi_model {
+class GetApiModel {
   int? postId;
   int? id;
   String? name;
   String? email;
   String? body;
 
-  GetApi_model({this.postId, this.id, this.name, this.email, this.body});
+  GetApiModel({this.postId, this.id, this.name, this.email, this.body});
 
-  GetApi_model.fromJson(Map<String, dynamic> json) {
+  GetApiModel.fromJson(Map<String, dynamic> json) {
     postId = json['postId'];
     id = json['id'];
     name = json['name'];
