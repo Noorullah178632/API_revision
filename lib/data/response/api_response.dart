@@ -6,9 +6,9 @@ class ApiResponse<T> {
   String? message;
   ApiResponse(this.status, this.data, this.message);
   //make three named constrctor for the status
-  ApiResponse.completed(this.message) : status = Status.COMPLETED;
+  ApiResponse.completed(this.data) : status = Status.COMPLETED;
   ApiResponse.loading() : status = Status.LOADING;
-  ApiResponse.error(this.data) : status = Status.ERROR;
+  ApiResponse.error(this.message) : status = Status.ERROR;
 
   //make a override function to get all the value
   @override
